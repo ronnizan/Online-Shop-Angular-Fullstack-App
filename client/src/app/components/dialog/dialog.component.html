@@ -1,0 +1,25 @@
+
+<form class="login-container">
+    <div class="login-row">
+        <i class="fas fa-user"></i>
+
+        <mat-form-field appearance="standard">
+            <mat-label>Email</mat-label>
+            <input [(ngModel)]="email" autocomplete="off" type="text" name="email" matInput>
+        </mat-form-field>
+
+    </div>
+    <br>
+    <div class="login-row">
+        <i class="fas fa-lock"></i>
+        <mat-form-field appearance="standard">
+            <mat-label>Password</mat-label>
+            <input [(ngModel)]="password" autocomplete="off" name="password" type="password" matInput>
+        </mat-form-field>
+
+    </div>
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [mat-dialog-close]="true" (click)="onSubmit()" cdkFocusInitial>Login</button>
+    </mat-dialog-actions>
+</form>

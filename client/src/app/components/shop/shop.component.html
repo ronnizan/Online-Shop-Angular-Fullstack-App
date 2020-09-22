@@ -1,0 +1,83 @@
+<mat-drawer-container class="drawer-container" autosize hasBackdrop=false>
+  <mat-drawer *ngIf="cart" #drawer opened class="example-sidenav" mode="side">
+    <div class="cart-header">Your Cart :</div>
+    <div class="cart-box" *ngFor="let cartItem of cart.cartItems; let i = index">
+      <span class="cart-item-row">
+        <span class="img-and-name">
+          <img class="side-img" src={{cartItem.product.imagePath}} alt={{cartItem.product.name}}>
+          <span>{{cartItem.product.name}}</span>
+        </span>
+        <span>{{cartItem.totalPrice}}₪</span>
+        <span class="update-product">
+          <i (click)="addCartItemAmountCart(i)" class="fas fa-plus"></i>
+          <span class="cart-item-amount">{{cartItem.amount}}
+          </span>
+          <i (click)="reduceCartItemAmountCart(i)" class="fas fa-minus"></i>
+        </span>
+        <span (click)="removeCartItem(i)" class="delete-product"><i class="fas fa-times"></i></span>
+
+      </span>
+    </div>
+    <div class="summary-div">
+      <span class="cart-sidenav">
+        <span>{{cart.cartItems.length}}</span>
+        <i class="fas fa-shopping-cart"></i>
+      </span>
+      <span>{{totalCartPrice}}₪</span>
+      <a mat-button routerLink="/checkout">CHECKOUT</a>
+
+    </div>
+
+
+  </mat-drawer>
+  <div class="categories-row">
+    <button mat-button (click)="getProductsByCategory(category._id)" class="category-box"
+      *ngFor="let category of categories">
+      {{category.name}} </button>
+  </div>
+  <div class="example-sidenav-content">
+    <div *ngIf="products">
+      <div class="container">
+        <div class="page-inner">
+          <div *ngFor="let product of products; let i = index" class="row">
+            <div class="el-wrapper">
+              <div class="box-up">
+                <img class="img" src={{product.imagePath}} alt="">
+                <div class="img-info">
+                  <div class="info-inner">
+                    <span class="p-name">{{product.name}}</span>
+                    <!-- <span class="p-company">{{product.name}}</span> -->
+                  </div>
+                  <div class="a-size">Amount :
+                    <span class="size">
+                      <span class="update-product-in-cards">
+                        <i (click)="addAmountToProduct(i)" class="fas fa-plus"></i>
+                        <span class="cart-item-amount">{{products[i].amount? products[i].amount:1}}
+                        </span>
+                        <i (click)="reduceAmountFromProduct(i)" class="fas fa-minus"></i>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="box-down">
+                <div class="h-bg">
+                  <div class="h-bg-inner"></div>
+                </div>
+
+                <a class="cart">
+                  <span class="price">{{product.price}}₪</span>
+                  <span class="add-to-cart">
+                    <span (click)="addCartItem(product)" class="txt">{{checkIfProductInCart(product)}}</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</mat-drawer-container>

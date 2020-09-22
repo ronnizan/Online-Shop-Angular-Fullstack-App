@@ -1,0 +1,6 @@
+<h1>Thank you {{data.orderDeatils.firstName}}!</h1>
+<div>
+    <app-pdf-receipt *ngIf="data.orderDeatils" [orderDeatils]="data.orderDeatils" [cart]="data.cart"></app-pdf-receipt>
+    <button #closeBtn mat-button mat-dialog-close>Close</button>
+
+</div>

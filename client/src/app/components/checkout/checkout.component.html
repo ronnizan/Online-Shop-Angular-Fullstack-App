@@ -1,0 +1,45 @@
+<section></section>
+<div class="contain">
+    <p class="norm bold"></p>
+    <p id="line" class="fancy-title fancy-line"><span>checkout</span></p>
+    <p class="norm bold"></p>
+</div>
+<div class="container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title class="card-title"><a routerLink="/shop" mat-button><i class="fas fa-store"></i> Back To
+                    Shop</a></mat-card-title>
+            <mat-card-title>My Cart:</mat-card-title>
+        </mat-card-header>
+        <input placeholder="Search Product..." class="search-product-input" type="text" [(ngModel)]="searchedProduct">
+        <mat-card-content *ngIf="cart">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name:</th>
+                        <th>Amount:</th>
+                        <th>Total Price:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cartItem of cart.cartItems">
+                        <td> <img src={{cartItem.product.imagePath}} alt=""></td>
+                        <td
+                            [ngStyle]="searchedProduct && checkSearchedProduct(cartItem.product.name) ?{'background-color':'rgba(255, 217, 0, 0.575)'} : {'background-color': 'transparent'}">
+                            {{cartItem.product.name}}</td>
+                        <td>{{cartItem.amount}}</td>
+                        <td>{{cartItem.totalPrice}}₪</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="total-cart-sum">Total Cart Sum: {{totalCartPrice}}₪</p>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <app-order-form *ngIf="cart && totalCartPrice" [cartId]="cart._id " [totalCartPrice]="totalCartPrice">
+        </app-order-form>
+    </mat-card>
+
+</div>

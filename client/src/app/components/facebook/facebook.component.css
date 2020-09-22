@@ -1,0 +1,28 @@
+button {
+    text-decoration: none;
+    color: white;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font-weight:bolder;
+    cursor: pointer;
+}
+button:hover {
+    text-decoration: none;
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+i {
+    font-size: 1.3rem;
+    color: blue;
+}
+
+.fa-google {
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(132deg, rgba(199, 20, 9, 0.9783263647255778) 24%, rgba(255, 243, 0, 1) 50%, rgba(58, 217, 17, 1) 72%, rgba(0, 1, 255, 1) 100%);
+}

@@ -1,0 +1,81 @@
+<mat-drawer-container class="drawer-container" autosize hasBackdrop=false>
+  <mat-drawer *ngIf="products" #drawer opened mode="side">
+    <div class="cart-header"><i class="fas fa-edit"></i> Product Edit :</div>
+    <div>
+      <form [formGroup]="form" (submit)="onSaveProduct()">
+        <button *ngIf="editedProduct" (click)="switchToAddMode()" mat-raised-button type="button" color="primary">Switch
+          to Add Product</button>
+        <br>
+        <mat-form-field>
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category">
+            <mat-option *ngFor="let category of categories" value={{category._id}}>{{category.name}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('category').invalid">
+            Category is required!
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" formControlName="name" placeholder="Product Name" autocomplete="off">
+          <mat-error *ngIf="form.get('name').invalid">Please enter a Product Name.</mat-error>
+        </mat-form-field>
+        <div class="add-image">
+          <button class="add-image-button" mat-stroked-button type="button" (click)="filePicker.click()">Pick A Product
+            Image</button>
+          <input type="file" #filePicker (change)="onImagePicked($event)">
+        </div>
+        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+          <img [src]="imagePreview" [alt]="form.value.title">
+        </div>
+        <mat-form-field>
+          <input matInput formControlName="price" type="number" placeholder="Product Price" autocomplete="off">
+          <mat-error *ngIf="form.get('price').invalid">Please Enter A Product Price.</mat-error>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary"
+          type="submit">{{editedProduct ? "Update Product":"Add Product"}}</button>
+      </form>    
+    </div>
+  </mat-drawer>
+  <div class="categories-row">
+    <button mat-button (click)="getProductsByCategory(category._id)" class="category-box"
+      *ngFor="let category of categories">
+      {{category.name}} </button>
+  </div>
+  <button (click)="openAddProductDialog()" mat-raised-button color="primary" class="open-dialog-btn" type="submit">Add Product</button>
+  <div>
+    <div *ngIf="products">
+      <div class="container">
+        <div class="page-inner">
+          <div *ngFor="let product of products; let i = index">
+            <div class="el-wrapper">
+              <div class="box-up">
+                <img class="img" src={{product.imagePath}} alt="">
+                <div>
+                  <div class="info-inner">
+                    <span class="p-name">{{product.name}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="box-down">
+                <div class="h-bg">
+                  <div class="h-bg-inner"></div>
+                </div>
+
+                <a class="cart">
+                  <span class="price">{{product.price}}₪</span>
+                  <span class="add-to-cart">
+                    <span (click)="sendProductToEditing(product)" class="txt">update Product</span>
+                    <span (click)="openUpdateProductDialog(product)" class=" open-update-dialog-btn">update Product</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</mat-drawer-container>

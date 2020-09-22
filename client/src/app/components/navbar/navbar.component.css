@@ -1,0 +1,93 @@
+mat-toolbar {
+    background-color: rgb(0, 0, 0);
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    z-index: 100;
+    justify-content: space-between;
+}
+
+.nav-box {
+    height: 100px;
+
+}
+
+.img-name-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -40px;
+    font-size: 15px;
+}
+
+.cart-box {
+    position: relative;
+    position: flex;
+}
+
+.cart-box span {
+    position: absolute;
+    top: -2px;
+    right: 15px;
+}
+
+.fa-shopping-cart {
+    font-size: 30px;
+    position: absolute;
+    top: 25px;
+    left: 15px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+img {
+    height: 100px;
+    object-fit: contain;
+    margin-right: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    text-decoration: none;
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+    background-color: rgba(128, 128, 128, 0.014)
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+@media screen and (max-width: 480px) {
+    mat-toolbar {
+        height: 150px;
+        margin-bottom: 250px;
+    }
+
+}
+
+@media screen and (max-width: 335px) {
+    mat-toolbar {
+        height: 150px;
+    }
+    .logout {
+        position: absolute;
+        right: 150px;
+    }
+}
+
+.active {
+    color: green;
+}

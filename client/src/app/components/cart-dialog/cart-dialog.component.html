@@ -1,0 +1,32 @@
+<div *ngIf="cart">
+    <div class="top-row">
+        <p *ngIf="cart">Cart From:{{cart.createdAt |date}}</p>
+        <button #closeBtn mat-button mat-dialog-close>X</button>
+    </div>
+
+    <div class="cart-box" *ngFor="let cartItem of cart.cartItems; let i = index">
+        <span class="cart-item-row">
+            <span class="img-and-name">
+                <img class="side-img" src={{cartItem.product.imagePath}} alt={{cartItem.product.name}}>
+                <span>{{cartItem.product.name}}</span>
+            </span>
+            <span>{{cartItem.totalPrice}}₪</span>
+            <span class="update-product">
+                <i (click)="addCartItemAmountCart(i)" class="fas fa-plus"></i>
+                <span>{{cartItem.amount}}
+                </span>
+                <i (click)="reduceCartItemAmountCart(i)" class="fas fa-minus"></i>
+            </span>
+            <span (click)="removeCartItem(i)" class="delete-product"><i class="fas fa-times"></i></span>
+
+        </span>
+    </div>
+    <div *ngIf="cart" class="summary-div">
+        <span class="cart-sidenav">
+            <span>{{cart.cartItems.length}}</span>
+            <i class="fas fa-shopping-cart"></i>
+        </span>
+        <span>{{totalCartPrice}}₪</span>
+        <a mat-button routerLink="/checkout">CHECKOUT</a>
+    </div>
+</div>

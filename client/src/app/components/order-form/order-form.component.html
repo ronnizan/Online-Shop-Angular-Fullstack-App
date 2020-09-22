@@ -1,0 +1,133 @@
+<div class="contain">
+  <p class="norm bold">Please</p>
+  <p id="line" class="fancy-title fancy-line"><span>Fill</span></p>
+  <p class="norm bold">order-deatils</p>
+</div>
+<div class="container">
+  <mat-vertical-stepper [linear]="true" #stepper>
+    <div>
+      <mat-step *ngIf="!user.city" [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Please Fill Personal Deatils
+          </ng-template>
+          <mat-form-field>
+            <mat-label>City</mat-label>
+            <mat-select formControlName="cityCtrl">
+              <mat-option *ngFor="let city of citiesList" value={{city}}>{{city}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="firstFormGroup.controls['cityCtrl'].hasError('required')">
+              City is required!
+            </mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <mat-label>Street</mat-label>
+            <input matInput autocomplete="off" formControlName="streetCtrl" placeholder="Street" required>
+            <mat-error *ngIf="firstFormGroup.controls['streetCtrl'].hasError('required')">
+              Street is required!
+            </mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <mat-label>Identity Number</mat-label>
+            <input autocomplete="off" matInput placeholder="Identity Number" formControlName="identityNumberCtrl"
+              required>
+            <mat-error *ngIf="firstFormGroup.controls['identityNumberCtrl'].hasError('required')">
+              Identity Number is required!
+            </mat-error>
+            <mat-error
+              *ngIf="firstFormGroup.controls['identityNumberCtrl'].hasError('minlength') || firstFormGroup.controls['identityNumberCtrl'].hasError('maxlength')">
+              Identity Number must have 9 characters!
+            </mat-error>
+            <mat-error *ngIf="firstFormGroup.controls['identityNumberCtrl'].hasError('idAlreadyExistsInDb')">
+              Identity Number exists!
+            </mat-error>
+            <mat-error *ngIf="firstFormGroup.controls['identityNumberCtrl'].hasError('pattern')">
+              Identity Number must be a Number!
+            </mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button (click)="submitSocialUserUpdate()" mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+    </div>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Please Fill Order Deatils</ng-template>
+        <mat-form-field>
+          <mat-label>City:</mat-label>
+          <input matInput placeholder="City" formControlName="cityCtrl" required>
+          <mat-error *ngIf="secondFormGroup.controls['cityCtrl'].hasError('required')">
+            City is required!
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Street:</mat-label>
+          <input autocomplete="off" matInput placeholder="Street" formControlName="streetCtrl" required>
+          <mat-error *ngIf="secondFormGroup.controls['streetCtrl'].hasError('required')">
+            Street is required!
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Delivery Date:</mat-label>
+          <input matInput autocomplete="off" type="date" [min]="minDate" formControlName="deliveryDateCtrl" required>
+          <mat-error *ngIf="secondFormGroup.controls['deliveryDateCtrl'].hasError('required')">
+            Delivery Date is required!
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Credit Card Number</mat-label>
+          <input autocomplete="off" matInput placeholder="Credit Card Number" formControlName="creditCardCtrl" required>
+          <mat-error *ngIf="secondFormGroup.controls['creditCardCtrl'].hasError('required')">
+            Credit Card Number is required!
+          </mat-error>
+
+          <mat-error *ngIf="secondFormGroup.controls['creditCardCtrl'].hasError('pattern')">
+            Credit Card Number Is Not Valid!
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Credit Card Expiration Date:</mat-label>
+          <input matInput autocomplete="off" type="month" [min]="minDateForYearAndMonthInput"
+            formControlName="creditCardExpirationDateCtrl" required>
+          <mat-error *ngIf="secondFormGroup.controls['creditCardExpirationDateCtrl'].hasError('required')">
+            Credit Card Expiration Date is required!
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>CVV</mat-label>
+          <input autocomplete="off" matInput placeholder="CVV" formControlName="cvvCtrl" required>
+          <mat-error *ngIf="secondFormGroup.controls['cvvCtrl'].hasError('required')">
+            CVV is required!
+          </mat-error>
+          <mat-error
+            *ngIf="secondFormGroup.controls['cvvCtrl'].hasError('minlength') || secondFormGroup.controls['cvvCtrl'].hasError('maxlength')">
+            CVV must have 3 characters!
+          </mat-error>
+          <mat-error *ngIf="secondFormGroup.controls['cvvCtrl'].hasError('pattern')">
+            CVV must be a Number!
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>Please Press On The Order Button To Complete Your Order.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="onSubmit()">Order</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+
+</div>

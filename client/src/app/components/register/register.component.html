@@ -1,0 +1,120 @@
+<div class="contain">
+  <p class="norm bold">Register</p>
+  <p id="line" class="fancy-title fancy-line"><span>To</span></p>
+  <p class="norm bold">ONLINE-SHOP</p>
+</div>
+<div class="container">
+  <mat-vertical-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="firstFormGroup"> 
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Please Fill First Deatils</ng-template>
+        <mat-form-field>
+          <mat-label>Email:</mat-label>
+          <input matInput placeholder="Email" formControlName="emailCtrl" required>
+          <mat-error *ngIf="firstFormGroup.controls['emailCtrl'].hasError('required')">
+            Email is required!
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.controls['emailCtrl'].hasError('email')">
+            Email not valid!
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Identity Number</mat-label>
+          <input autocomplete="off" matInput placeholder="Identity Number" formControlName="identityNumberCtrl" required>
+          <mat-error *ngIf="firstFormGroup.controls['identityNumberCtrl'].hasError('required')">
+            Identity Number is required!
+          </mat-error>
+          <mat-error
+            *ngIf="firstFormGroup.controls['identityNumberCtrl'].hasError('minlength') || firstFormGroup.controls['identityNumberCtrl'].hasError('maxlength')">
+            Identity Number must have 9 characters!
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.controls['identityNumberCtrl'].hasError('idAlreadyExistsInDb')">
+            Identity Number exists!
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.controls['identityNumberCtrl'].hasError('pattern')">
+            Identity Number must be a Number!
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput autocomplete="off" type="password" placeholder="Password" formControlName="passwordCtrl" required>
+          <mat-error *ngIf="firstFormGroup.controls['passwordCtrl'].hasError('required')">
+            password is required!
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.controls['passwordCtrl'].hasError('minlength')">
+            Password must have 6 characters!
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Confirm Password</mat-label>
+          <input matInput autocomplete="off" type="password" placeholder="Confirm Password" formControlName="confirmPasswordCtrl" required>
+          <mat-error *ngIf="firstFormGroup.controls['confirmPasswordCtrl'].hasError('required')">
+            password is required!
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.controls['confirmPasswordCtrl'].hasError('passwordsNotMatching')">
+            Passwords do not match!
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Please Fill Additional Deatils</ng-template>
+        <mat-form-field>
+          <mat-label>City</mat-label>
+          <mat-select formControlName="cityCtrl">
+            <mat-option *ngFor="let city of citiesList" value={{city}}>{{city}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="secondFormGroup.controls['cityCtrl'].hasError('required')">
+            City is required!
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Street</mat-label>
+          <input matInput autocomplete="off" formControlName="streetCtrl" placeholder="Street" required>
+          <mat-error *ngIf="secondFormGroup.controls['streetCtrl'].hasError('required')">
+            Street is required!
+          </mat-error>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field>
+          <mat-label>First Name</mat-label>
+          <input matInput  formControlName="firstNameCtrl" placeholder="First Name" required>
+          <mat-error *ngIf="secondFormGroup.controls['firstNameCtrl'].hasError('required')">
+            First Name is required!
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastNameCtrl" placeholder="Last Name" required>
+          <mat-error *ngIf="secondFormGroup.controls['lastNameCtrl'].hasError('required')">
+            Last Name is required!
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>Please Press Register To Complete The Registration.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="onSubmit()">Register</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+
+</div>

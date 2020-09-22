@@ -1,0 +1,20 @@
+.footer {
+    position: static;
+    background-color:black;
+    color:white;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    text-align: center;
+}
+i{
+    color:white;
+}
+
+main{
+    position: relative;
+    min-height: 100%;
+    background-color: rgba(211, 211, 211, 0.452);
+
+}

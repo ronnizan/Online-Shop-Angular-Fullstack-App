@@ -1,0 +1,27 @@
+
+mat-dialog-actions{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 20px;
+}
+
+
+.login-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+i{
+    position:relative;
+    right: 15px;
+    top:5px;
+}
+
+
+
+
+
+
+

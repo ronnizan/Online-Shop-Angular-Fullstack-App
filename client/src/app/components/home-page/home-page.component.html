@@ -1,0 +1,74 @@
+<section></section>
+<div class="contain">
+    <p class="norm bold">Welcome</p>
+    <p id="line" class="fancy-title fancy-line"><span>To</span></p>
+    <p class="norm bold">ONLINE-SHOP</p>
+</div>
+<div class="container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Welcome {{user?.firstName || "User"}}!</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content *ngIf="user?.role !=='Admin'">
+            <p *ngIf="!userIsAuthenticated">
+                Welcome!,in order to continue to our shop you must login:
+            </p>
+            <p *ngIf="userIsAuthenticated && lastOrder">
+                You're last Order was at {{lastOrder.createdAt |date}}.
+            </p>
+            <p *ngIf="userIsAuthenticated && !lastOrder">
+                You haven't made an order yet..
+            </p>
+            <p *ngIf="userIsAuthenticated && cart">
+                you have an open cart from {{cart.createdAt |date}}.
+                <br><br>
+                total cart Price: {{totalCartPrice}}₪.
+            </p>
+            <p *ngIf="userIsAuthenticated && !cart">
+                You Don't have an open cart, click on Go To shop Button To start Shopping.
+            </p>
+        </mat-card-content>
+        <mat-card-content *ngIf="user?.role ==='Admin'">
+            <p>
+                Welcome Admin!, Please Click On Go To Shop Button To Start Editing Products.
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <div *ngIf="!userIsAuthenticated" class="logs-wrapper">
+                <button (click)="openDialog()" mat-button><i class="fas fa-sign-in-alt"></i><br> Login</button>
+                <a mat-button routerLink="/register"><i class="fas fa-user-plus"></i><br> Register</a>
+                <div class="social-logs-wrapper">
+                    <button class="social-btn" mat-button>
+                        <app-google class="googleBtn" changeColor="true"></app-google>
+                    </button>
+                    <button class="social-btn" mat-button>
+                        <app-facebook changeColor="true"></app-facebook>
+                    </button>
+                </div>
+            </div>
+            <a *ngIf="userIsAuthenticated && cart && user?.role !== 'Admin'" mat-button routerLink="/shop"><i
+                    class="fas fa-shopping-basket"></i><br>Continue Shopping</a>
+            <a *ngIf="userIsAuthenticated && !cart && user?.role !== 'Admin'" mat-button routerLink="/shop"><i
+                    class="fas fa-shopping-basket"></i><br>Go To Shop</a>   
+            <a *ngIf="userIsAuthenticated && user?.role === 'Admin'" mat-button routerLink="/admin-shop"><i
+                    class="fas fa-shopping-basket"></i><br>Go To Shop</a>
+
+        </mat-card-actions>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-header>
+            <div class="info-container">
+                <mat-card-title class="products-container"> We Currently have:<br>{{totalAmountOfProducts}} Products
+                    <br> <i class="fas fa-carrot"></i>
+                </mat-card-title>
+                <mat-card-title class="products-container">Total Orders Made:<br>{{totalAmountOfOrders}} <br> <i
+                        class="fas fa-receipt"></i>
+                </mat-card-title>
+            </div>
+        </mat-card-header>
+    </mat-card>
+    <app-products-tabs *ngIf="user?.role !== 'Admin'"></app-products-tabs>
+
+</div>

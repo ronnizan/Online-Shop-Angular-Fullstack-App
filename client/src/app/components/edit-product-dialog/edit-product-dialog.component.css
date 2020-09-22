@@ -1,0 +1,41 @@
+button {
+    font-size: larger;
+}
+
+.add-image-button {
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.close-btn {
+    margin-bottom: 15px;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow-x: hidden;
+    flex-wrap: wrap;
+    vertical-align: center;
+}
+
+mat-form-field, .add-image {
+    width: 80%;
+    margin-left: 5%;
+    margin-right: 10%;
+}
+
+input[type="file"] {
+    visibility: hidden;
+}
+
+.image-preview {
+    height: 5rem;
+    margin: 1rem 0;
+}
+
+.image-preview img {
+    height: 100%;
+}

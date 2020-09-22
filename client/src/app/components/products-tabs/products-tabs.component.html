@@ -1,0 +1,71 @@
+<div class="contain">
+        <p class="norm bold">here are some of our
+        </p>
+        <p class="line" class="fancy-title fancy-line"><span>Best</span></p>
+        <p class="norm bold">products</p>
+</div>
+<div class="tabs-container">
+        <main *ngIf="products">
+
+                <input id="tab1" type="radio" name="tabs" checked>
+                <label for="tab1">Milk & Eggs</label>
+
+                <input id="tab2" type="radio" name="tabs">
+                <label for="tab2">Vegetables & Fruits</label>
+
+                <input id="tab3" type="radio" name="tabs">
+                <label for="tab3">Meat & Fish</label>
+
+                <input id="tab4" type="radio" name="tabs">
+                <label for="tab4">Wine & Drinks</label>
+                <section class="content1">
+                        <mat-tab-group headerPosition="below">
+                                <mat-tab *ngFor="let product of products.milkAndEggsProducts" label={{product.name}}>
+                                        <div class="img-description-container">
+                                                <img src={{product.imagePath}} alt="" srcset="">
+                                                <h3>{{product.name}}</h3>
+                                                <p>Price: {{product.price}}₪</p>
+                                        </div>
+                                </mat-tab>
+                        </mat-tab-group>
+                </section>
+
+                <section class="content2">
+                        <mat-tab-group headerPosition="below">
+                                <mat-tab *ngFor="let product of products.vegetablesAndFruitsProducts"
+                                        label={{product.name}}>
+                                        <div class="img-description-container">
+                                                <img src={{product.imagePath}} alt="" srcset="">
+                                                <h3>{{product.name}}</h3>
+                                                <p>Price: {{product.price}}₪</p>
+                                        </div>
+                                </mat-tab>
+                        </mat-tab-group>
+                </section>
+
+                <section class="content3">
+                        <mat-tab-group headerPosition="below">
+                                <mat-tab *ngFor="let product of products.meatAndFishProducts" label={{product.name}}>
+                                        <div class="img-description-container">
+                                                <img src={{product.imagePath}} alt="" srcset="">
+                                                <h3>{{product.name}}</h3>
+                                                <p>Price: {{product.price}}₪</p>
+                                        </div>
+                                </mat-tab>
+                        </mat-tab-group>
+                </section>
+
+                <section class="content4">
+                        <mat-tab-group headerPosition="below">
+                                <mat-tab *ngFor="let product of products.wineAndDrinks" label={{product.name}}>
+                                        <div class="img-description-container">
+                                                <img src={{product.imagePath}} alt="" srcset="">
+                                                <h3>{{product.name}}</h3>
+                                                <p>Price: {{product.price}}c</p>
+                                        </div>
+                                </mat-tab>
+                        </mat-tab-group>
+                </section>
+
+        </main>
+</div>

@@ -1,0 +1,29 @@
+<div style="visibility: hidden; display: none;" *ngIf="orderDeatils" id="pdfTable" #pdfTable>
+  <h2>Order Date: {{orderDeatils.createdAt |date}}</h2>
+  <h2>Delivery Date: {{orderDeatils.dateOfDelivery |date}}</h2>
+  <h2>Delivery Destination: {{orderDeatils.city}},{{orderDeatils.street}}</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name:</th>
+        <th>Amount:</th>
+        <th>Total Price:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cartItem of cart.cartItems">
+        <td>{{cartItem.product.name}}</td>
+        <td>{{cartItem.amount}}</td>
+        <td>{{cartItem.totalPrice}}NIS</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2> Total Cart Sum: {{orderDeatils.totalPrice}}
+  </h2>
+</div>
+
+<div>
+  <button mat-button (click)="downloadAsPDF()">Download Pdf Receipt</button>
+
+</div>
