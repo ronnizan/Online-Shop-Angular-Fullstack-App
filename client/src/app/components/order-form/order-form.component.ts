@@ -66,7 +66,7 @@ export class OrderFormComponent implements OnInit, OnDestroy {
     this.secondFormGroup = this._formBuilder.group({
       cityCtrl: [this.user.city, [Validators.required]],
       streetCtrl: [this.user.street, [Validators.required]],
-      deliveryDateCtrl: ['', [Validators.required]],
+      deliveryDateCtrl: ['', [Validators.required],[this.checkIfDeliveryDateIsAvailable(this.ordersService)]],
       creditCardCtrl: ['', [Validators.required, Validators.pattern("^(?:4[0-9]{12}(?:[0-9]{3})?|(?:5[1-5][0-9]{2}| 222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|3[47][0-9]{13}|  3(?:0[0-5]|[68][0-9])[0-9]{11}|  6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\d{3})\d{11})$")]],
       //    validation for:
       //    Visa
@@ -91,7 +91,15 @@ export class OrderFormComponent implements OnInit, OnDestroy {
             ? { idAlreadyExistsInDb: true } : null;
         }),
       );
-
+  };
+  checkIfDeliveryDateIsAvailable = (ordersService: OrdersService) => (c: FormControl) => {
+    return ordersService.checkIfDeliveryDateIsAvailable(c.value)
+      .pipe(debounceTime(10000), take(1),
+        map((IsAvailable: boolean) => {
+          return IsAvailable
+            ? null : { deliveryDateNotAvailable: true };
+        }),
+      );
   };
 
   setMinDateForYearAndMonthInput() {

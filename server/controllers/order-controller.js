@@ -2,9 +2,7 @@ const express = require("express");
 const { orderValidator } = require("../validators/order");
 const { runValidation } = require("../validators");
 const { Order } = require("../models/order_cart_item");
-const {
-  validateUserToken,
-} = require("../middleware/check-auth");
+const { validateUserToken } = require("../middleware/check-auth");
 const ordersLogic = require("../business-logic/order-logic");
 
 const router = express.Router();
@@ -42,6 +40,22 @@ router.post(
     }
   }
 );
+router.post(
+  "/check-if-deliveryDate-available",
+  validateUserToken,
+  async (req, res) => {
+    try {
+      const dateOfDelivery = req.body.dateOfDelivery;
+      const isDeliveryDateAvailable = await ordersLogic.checkIfDeliveryDateIsAvailable(
+        dateOfDelivery
+      );
+      return res.status(200).json(isDeliveryDateAvailable);
+    } catch (error) {
+      res.status(500).json({ error: "server error" });
+    }
+  }
+);
+
 router.get("/get-receipt/:cartId", validateUserToken, async (req, res) => {
   try {
     const detailsNeededForReceipt = await ordersLogic.getOrderDetail(
@@ -58,9 +72,7 @@ router.get("/get-receipt/:cartId", validateUserToken, async (req, res) => {
 });
 router.get("/get-last-order", validateUserToken, async (req, res) => {
   try {
-    const order = await ordersLogic.getLastOrder(
-      req.user._id
-    );
+    const order = await ordersLogic.getLastOrder(req.user._id);
     if (!order) {
       return res.status(200).json(null);
     }

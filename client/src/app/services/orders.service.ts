@@ -16,7 +16,10 @@ export class OrdersService {
   addOrder(orderData) {
     return this.http.post<boolean>(ordersBaseUrl + "/add-order", orderData);
   }
-
+  checkIfDeliveryDateIsAvailable(dateOfDelivery:string) {
+    return this.http.post<boolean>(ordersBaseUrl + "/check-if-deliveryDate-available", {dateOfDelivery:dateOfDelivery});
+  }
+   
   getLastOrder() {
     return this.http.get<OrderModel>(ordersBaseUrl + "/get-last-order")
   }

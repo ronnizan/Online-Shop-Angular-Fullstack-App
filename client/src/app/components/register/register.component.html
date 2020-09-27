@@ -30,7 +30,7 @@
             Identity Number must have 9 characters!
           </mat-error>
           <mat-error *ngIf="firstFormGroup.controls['identityNumberCtrl'].hasError('idAlreadyExistsInDb')">
-            Identity Number exists!
+            Identity Number already exists!
           </mat-error>
           <mat-error *ngIf="firstFormGroup.controls['identityNumberCtrl'].hasError('pattern')">
             Identity Number must be a Number!

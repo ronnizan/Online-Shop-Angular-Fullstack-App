@@ -8,6 +8,17 @@ async function getAllOrdersAmount() {
     return 0;
   }
 }
+async function checkIfDeliveryDateIsAvailable(deliveryDate) {
+  try {
+    const orders = await Order.find({ dateOfDelivery: deliveryDate });
+    if (orders.length > 3) {
+      return false;
+    }
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
 
 async function addNewOrder(order) {
   try {
@@ -28,7 +39,9 @@ async function addNewOrder(order) {
 
 async function getOrderDetail(cartId) {
   try {
-    const orderDetails = await Order.findOne({ cart:cartId}).populate("client");
+    const orderDetails = await Order.findOne({ cart: cartId }).populate(
+      "client"
+    );
     if (orderDetails) {
       return {
         firstName: orderDetails.client.firstName,
@@ -61,6 +74,7 @@ async function getLastOrder(clientId) {
 
 module.exports = {
   getAllOrdersAmount,
+  checkIfDeliveryDateIsAvailable,
   addNewOrder,
   getOrderDetail,
   getLastOrder,
